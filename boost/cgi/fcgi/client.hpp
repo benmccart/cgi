@@ -163,7 +163,7 @@ BOOST_CGI_NAMESPACE_BEGIN
   void
   basic_client<
       ::BOOST_CGI_NAMESPACE::common::tags::fcgi
-  >::handle_write(std::size_t bytes_transferred, boost::system::error_code& ec)
+  >::handle_write(boost::system::error_code& ec, std::size_t bytes_transferred)
   {
     total_sent_bytes_ += bytes_transferred;
     total_sent_packets_ += 1;
@@ -215,7 +215,7 @@ BOOST_CGI_NAMESPACE_BEGIN
       = boost::asio::write(*connection_, outbuf_
                           , boost::asio::transfer_all(), ec);
 
-    handle_write(bytes_transferred, ec);
+    handle_write(ec, bytes_transferred);
     
     return bytes_transferred;
   }
@@ -242,8 +242,8 @@ BOOST_CGI_NAMESPACE_BEGIN
     std::size_t bytes_transferred
       = boost::asio::write(*connection_, outbuf_
                           , boost::asio::transfer_all(), ec);
-    handle_write(bytes_transferred, ec);
-    handler(bytes_transferred, ec);
+    handle_write(ec, bytes_transferred);
+    handler(ec, bytes_transferred);
   }
 
  } // namespace common

@@ -216,8 +216,7 @@ BOOST_CGI_NAMESPACE_BEGIN
     void prepare_buffer(const ConstBufferSequence& buf)
     { /* NOOP */ }
         
-    void handle_write(
-      std::size_t bytes_transferred, boost::system::error_code& ec)
+    void handle_write(boost::system::error_code& ec, std::size_t bytes_transferred)
     { /* NOOP */ }
   
     //io_service&                           io_service_;

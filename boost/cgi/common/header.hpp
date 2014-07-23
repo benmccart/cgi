@@ -105,13 +105,13 @@ BOOST_CGI_NAMESPACE_BEGIN
    basic_header<CharT>
      content_type(std::basic_string<CharT,Traits,Alloc> const& str)
    {
-     return basic_header<CharT>("Content-type", str);
+     return basic_header<CharT>("Content-Type", str);
    }
 
    template<typename CharT> basic_header<CharT>
      content_type(const CharT* str)
    {
-     return basic_header<CharT>("Content-type", str);
+     return basic_header<CharT>("Content-Type", str);
    }
 
    template<typename CharT> charset_header<CharT>
@@ -123,33 +123,33 @@ BOOST_CGI_NAMESPACE_BEGIN
    template<typename CharT> basic_header<CharT>
      content_encoding(std::basic_string<CharT> const& str)
    {
-     return basic_header<CharT>("Content-encoding", str);
+     return basic_header<CharT>("Content-Encoding", str);
    }
 
    template<typename CharT> basic_header<CharT>
      content_length(const CharT * t)
    {
-     return basic_header<CharT>("Content-length",
+     return basic_header<CharT>("Content-Length",
               boost::lexical_cast<std::basic_string<CharT> >(t));
    }
 
    template<typename CharT, typename T> basic_header<CharT>
      content_length(T t)
    {
-     return basic_header<CharT>("Content-length",
+     return basic_header<CharT>("Content-Length",
               boost::lexical_cast<std::basic_string<CharT> >(t));
    }
 
    template<typename CharT> basic_header<CharT>
      content_length(std::basic_string<CharT> const& str)
    {
-     return basic_header<CharT>("Content-length", str);
+     return basic_header<CharT>("Content-Length", str);
    }
 
    template<typename CharT> basic_header<CharT>
      content_length(basic_response<CharT>& resp)
    {
-     return basic_header<CharT>("Content-length",
+     return basic_header<CharT>("Content-Length",
                 boost::lexical_cast<std::string>(resp.content_length()));
    }
 
@@ -170,6 +170,13 @@ BOOST_CGI_NAMESPACE_BEGIN
    {
      return basic_header<CharT>("Location", url);
    }
+
+   template<typename CharT> basic_header<CharT>
+     transfer_encoding(std::basic_string<CharT> const& str)
+   {
+     return basic_header<CharT>("Transfer-Encoding", str);
+   }
+
    //}
 
  } // namespace common
