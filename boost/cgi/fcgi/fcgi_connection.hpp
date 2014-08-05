@@ -26,7 +26,8 @@ BOOST_CGI_NAMESPACE_BEGIN
   {
   public:
     typedef basic_connection<tags::fcgi_transport> type;
-    typedef boost::shared_ptr<type>                pointer;
+    typedef boost::shared_ptr<type>             pointer;
+    typedef boost::asio::ip::tcp::socket::native_handle_type native_handle_type;
 
     basic_connection(io_service& ios)
       : transport_(detail::transport_type())
@@ -40,6 +41,14 @@ BOOST_CGI_NAMESPACE_BEGIN
 #endif // BOOST_WINDOWS
       else // transport_ == detail::transport::socket
         socket_.reset(new boost::asio::ip::tcp::socket(ios));
+    }
+
+    native_handle_type native_handle() const
+    {
+        if (transport_ == detail::transport::pipe)
+            return reinterpret_cast<SOCKET>(pipe_->file_handle);
+        else
+            return socket_->native_handle();
     }
 
     bool is_open() const
