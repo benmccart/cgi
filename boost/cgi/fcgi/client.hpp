@@ -163,7 +163,7 @@ BOOST_CGI_NAMESPACE_BEGIN
   void
   basic_client<
       ::BOOST_CGI_NAMESPACE::common::tags::fcgi
-  >::handle_write(boost::system::error_code& ec, std::size_t bytes_transferred)
+  >::handle_write(boost::system::error_code& ec, std::size_t &bytes_transferred)
   {
     total_sent_bytes_ += bytes_transferred;
     total_sent_packets_ += 1;
