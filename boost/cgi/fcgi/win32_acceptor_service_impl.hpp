@@ -468,7 +468,9 @@ BOOST_CGI_NAMESPACE_BEGIN
        new_request->status(common::accepted);
        int status = handler(*new_request);
        
-       impl.running_requests_.erase(insert_result.first);
+       if (!impl.running_requests_.empty())
+        impl.running_requests_.erase(insert_result.first);
+
        if (new_request->is_open()) {
          new_request->close(http::ok, status);
        }
